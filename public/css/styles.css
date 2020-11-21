@@ -1,0 +1,39 @@
+#hostsRegistrationForm {
+    display: none;
+}
+
+#organizationForm {
+    display: none;
+}
+
+#customerTypeForm {
+    display: none;
+}
+
+#existingCustomerForm {
+    display: none;
+}
+
+#newCustomerForm {
+    display: none;
+}
+
+#newInvoiceForm {
+    display: none;
+}
+
+#suppliersInput {
+    display: none;
+}
+
+#vendorsInput {
+    display: none;
+}
+
+#employeesInput{
+    display: none;
+}
+
+#downloadReports {
+    display: none;
+}
