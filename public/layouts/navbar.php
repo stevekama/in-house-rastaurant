@@ -90,7 +90,7 @@
                  <li class="nav-header">EXIT</li>
 
                  <li class="nav-item">
-                     <a href="#" class="nav-link">
+                     <a href="<?php echo base_url(); ?>login.php" class="nav-link">
                          <i class="fa fa-circle nav-icon"></i>
                          <p>Sign Out</p>
                      </a>
