@@ -21,5 +21,8 @@ require_once(CONFIG_PATH.DS.'sessions.php');
 // load all system functions
 require_once(CONFIG_PATH.DS.'functions.php');
 
-// load admins
+// load food type
 require_once(MODELS_PATH.DS.'food_type.php');
+
+// load foods
+require_once(MODELS_PATH.DS.'foods.php');

@@ -1,15 +1,15 @@
 <?php
 class Database
 {
-    // private $host = 'ao9moanwus0rjiex.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
-    // private $username = 'wl2ey05gy264zjx4';
-    // private $password = 'lphahk0enaa0jgnp';
-    // private $dbname = 'wymjb97iib1h95gd';
+    private $host = 'klbcedmmqp7w17ik.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	';
+    private $username = 'aljnhdru7sv17lqd';
+    private $password = 'f8f8p6n926h840u5';
+    private $dbname = 'f6qhz4pmqqpox00h';
 
-    private $host = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $dbname = 'in-house';
+    // private $host = 'localhost';
+    // private $username = 'root';
+    // private $password = '';
+    // private $dbname = 'in-house';
 
     private $conn;
 

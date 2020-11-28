@@ -2,16 +2,19 @@
 
 require_once(INIT_PATH . DS . 'initialization.php');
 
-class Food_Type
+class Foods
 {
 
     private $conn;
-    private $table_name = "food_type";
+    private $table_name = "foods";
 
     // table properties
 
     public $id;
-    public $type;
+    public $type_id;
+    public $food_name;
+    public $description;
+    public $price;
     public $created_date;
     public $edited_date;
 
@@ -29,13 +32,19 @@ class Food_Type
         $query = "";
         if (empty($this->id)) {
             $query .= "INSERT INTO " . $this->table_name . "(";
-            $query .= "type, created_date, edited_date";
+            $query .= "type_id, food_name, ";
+            $query .= "description, price, ";
+            $query .= "created_date, edited_date";
             $query .= ")VALUES(";
-            $query .= ":type, :created_date, :edited_date";
+            $query .= ":type_id, :food_name, ";
+            $query .= ":description, :price, ";
+            $query .= ":created_date, :edited_date";
             $query .= ")";
         }else{
             $query .= "UPDATE ".$this->table_name." SET ";
-            $query .= "type = :type, created_date = :created_date, edited_date = :edited_date ";
+            $query .= "type_id = :type_id, food_name = :food_name, ";
+            $query .= "description = :description, price = :price, ";
+            $query .= "created_date = :created_date, edited_date = :edited_date ";
             $query .= "WHERE id = :id";
         }
 
@@ -46,7 +55,10 @@ class Food_Type
         if (!empty($this->id)) {
             $this->id = htmlentities($this->id);
         }
-        $this->type = htmlentities($this->type);
+        $this->type_id = htmlentities($this->type_id);
+        $this->food_name = htmlentities($this->food_name);
+        $this->description = htmlentities($this->description);
+        $this->price = htmlentities($this->price);
         $this->created_date = htmlentities($this->created_date);
         $this->edited_date = htmlentities($this->edited_date);
 
@@ -54,7 +66,10 @@ class Food_Type
         if (!empty($this->id)) {
             $stmt->bindParam(':id', $this->id);
         }
-        $stmt->bindParam(':type', $this->type);
+        $stmt->bindParam(':type_id', $this->type_id);
+        $stmt->bindParam(':food_name', $this->food_name);
+        $stmt->bindParam(':description', $this->description);
+        $stmt->bindParam(':price', $this->price);
         $stmt->bindParam(':created_date', $this->created_date);
         $stmt->bindParam(':edited_date', $this->edited_date);
 
@@ -78,32 +93,14 @@ class Food_Type
         // execute statemrent 
         if ($stmt->execute()) {
             // fetch data
-            $type_object = array();
+            $food_object = array();
             $count = $stmt->rowCount();
             if ($count > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $type_object[] = $row;
+                    $food_object[] = $row;
                 }
             }
-            return $type_object;
-        }
-    }
-
-    public function find_by_type($type = '')
-    {
-        $query = "SELECT * FROM " . $this->table_name . " ";
-        $query .= "WHERE type = :type LIMIT 1";
-
-        //Prepare statement 
-        $stmt = $this->conn->prepare($query);
-
-        // Execute query
-        if ($stmt->execute(array('type' => $type))) {
-            $type = $stmt->fetch(PDO::FETCH_ASSOC);
-            // Set properties
-            return $type;
-        } else {
-            return false;
+            return $food_object;
         }
     }
 
@@ -124,4 +121,28 @@ class Food_Type
             return false;
         }
     }
+
+    public function find_by_type_id($type_id = 0)
+    {
+        $query = "SELECT * FROM " . $this->table_name . " ";
+        $query .= "WHERE type_id = :type_id ";
+        $query .= "ORDER BY id DESC";
+
+        // prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // execute statemrent 
+        if ($stmt->execute(array('type_id'=>$type_id))) {
+            // fetch data
+            $food_object = array();
+            $count = $stmt->rowCount();
+            if ($count > 0) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $food_object[] = $row;
+                }
+            }
+            return $food_object;
+        }
+    }
+
 }
