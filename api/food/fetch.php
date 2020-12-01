@@ -67,7 +67,6 @@ while($row = $statement->fetch(PDO::FETCH_ASSOC)){
     $sub_array[] = $row["food_name"];
     $sub_array[] = $row["description"];
     $sub_array[] = $row["price"];
-    $sub_array[] = '<button id="'.htmlentities($row["id"]).'" class="btn btn-info btn-flat order">PLACE ORDER</button>';
     $data[] = $sub_array;
 }
 

@@ -21,6 +21,7 @@
          <!-- Sidebar Menu -->
          <nav class="mt-2">
              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
                  <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                  <li class="nav-item has-treeview menu-open">
                      <a href="#" class="nav-link active">
@@ -39,63 +40,33 @@
                          </li>
                      </ul>
                  </li>
-                 <li class="nav-item">
-                     <a href="<?php echo public_url(); ?>fast_foods/index.php" class="nav-link">
-                         <i class="nav-icon fa fa-th"></i>
-                         <p>
-                             Fast Food
-                             <span class="right badge badge-info">
-                                 <?php
-                                    $type_name = htmlentities('FAST FOOD');
-                                    $type = new Food_Type();
-                                    $current_type = $type->find_by_type($type_name);
-                                    $foods = new Foods();
-                                    $org_foods = $foods->find_by_type_id($current_type['id']);
-                                    $num_foods = count($org_foods);
-                                    echo htmlentities($num_foods);
-                                    ?>
-                             </span>
-                         </p>
-                     </a>
-                 </li>
-                 <li class="nav-item">
-                     <a href="<?php echo public_url(); ?>breakfast/index.php" class="nav-link">
-                         <i class="nav-icon fa fa-th"></i>
-                         <p>
-                             Breakfast
-                             <span class="right badge badge-warning">
-                                <?php
-                                    $type_name = htmlentities('BREAKFAST');
-                                    $type = new Food_Type();
-                                    $current_type = $type->find_by_type($type_name);
-                                    $foods = new Foods();
-                                    $org_foods = $foods->find_by_type_id($current_type['id']);
-                                    $num_foods = count($org_foods);
-                                    echo htmlentities($num_foods);
-                                ?>
-                             </span>
-                         </p>
-                     </a>
-                 </li>
-                 <li class="nav-item">
-                     <a href="<?php echo public_url(); ?>lunch/index.php" class="nav-link">
-                         <i class="nav-icon fa fa-th"></i>
-                         <p>
-                             Lunch
-                             <span class="right badge badge-danger">
-                                <?php
-                                    $type_name = htmlentities('LUNCH');
-                                    $type = new Food_Type();
-                                    $current_type = $type->find_by_type($type_name);
-                                    $foods = new Foods();
-                                    $org_foods = $foods->find_by_type_id($current_type['id']);
-                                    $num_foods = count($org_foods);
-                                    echo htmlentities($num_foods);
-                                ?>
-                             </span>
-                         </p>
-                     </a>
-                 </li>
+                 <?php
+                    $type = new Food_Type();
+                    $food_types = $type->find_all();
+                    $count = count($food_types);
+                    if ($count > 0) {
+                        foreach ($food_types as $food_type) { ?>
+                         <li class="nav-item">
+                             <a href="<?php echo public_url(); ?>foods/index.php?type=<?php echo urlencode($food_type['type']); ?>" class="nav-link">
+                                 <i class="nav-icon fa fa-th"></i>
+                                 <p>
+                                     <?php echo htmlentities($food_type['type']); ?>
+                                     <span class="right badge badge-info">
+                                         <?php
+                                            $type_name = htmlentities($food_type['type']);
+                                            $type = new Food_Type();
+                                            $current_type = $type->find_by_type($type_name);
+                                            $foods = new Foods();
+                                            $org_foods = $foods->find_by_type_id($current_type['id']);
+                                            $num_foods = count($org_foods);
+                                            echo htmlentities($num_foods);
+                                            ?>
+                                     </span>
+                                 </p>
+                             </a>
+                         </li>
+                     <?php } ?>
+                 <?php } ?>
 
                  <li class="nav-header">ORDERS</li>
 
