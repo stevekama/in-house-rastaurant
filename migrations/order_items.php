@@ -2,13 +2,13 @@
 
 require_once(INIT_PATH . DS . 'initialization.php');
 
-class Orders_Migration
+class Order_Items_Migration
 {
 
     private $conn;
 
     // table name and schema 
-    private $table_name = "orders";
+    private $table_name = "order_items";
 
     // connect to db
     public function __construct()
@@ -23,10 +23,10 @@ class Orders_Migration
         $query = "CREATE TABLE IF NOT EXISTS " . $this->table_name . "(";
         $query .= "id INT(11) UNSIGNED  NOT NULL PRIMARY KEY AUTO_INCREMENT, ";
         $query .= "user_id INT(11) NOT NULL, ";
-        $query .= "amount VARCHAR(200) NOT NULL, ";
-        $query .= "paid VARCHAR(200) NOT NULL, ";
-        $query .= "payment_status VARCHAR(200) NOT NULL, ";
-        $query .= "order_status VARCHAR(200) NOT NULL, ";
+        $query .= "order_id INT(11) NOT NULL, ";
+        $query .= "food_id INT(11) NOT NULL, ";
+        $query .= "food_name VARCHAR(200) NOT NULL, ";
+        $query .= "price VARCHAR(200) NOT NULL, ";
         $query .= "created_date TIMESTAMP NULL DEFAULT NULL, ";
         $query .= "edited_date TIMESTAMP NULL DEFAULT NULL";
         $query .= ")";

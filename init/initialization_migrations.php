@@ -7,3 +7,6 @@ require_once(MIGRATION_PATH.DS.'food_type.php');
 
 // bring in foote type migration
 require_once(MIGRATION_PATH.DS.'foods.php');
+
+// bring in foote type migration
+require_once(MIGRATION_PATH.DS.'order.php');

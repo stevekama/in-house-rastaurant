@@ -99,11 +99,8 @@ require_once(PUBLIC_PATH . DS . "layouts" . DS . "header.php"); ?>
                     <div class="card-header border-0">
                         <h3 class="card-title">My Orders</h3>
                         <div class="card-tools">
-                            <a href="#" class="btn btn-tool btn-sm">
-                                <i class="fa fa-download"></i>
-                            </a>
-                            <a href="#" class="btn btn-tool btn-sm">
-                                <i class="fa fa-bars"></i>
+                            <a href="#" id="newOrderBtn" class="btn btn-info btn-sm">
+                                <i class="fa fa-plus"></i> Make Order
                             </a>
                         </div>
                     </div>
@@ -111,90 +108,15 @@ require_once(PUBLIC_PATH . DS . "layouts" . DS . "header.php"); ?>
                         <table class="table table-striped table-valign-middle">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>Food</th>
                                     <th>Price</th>
-                                    <th>Sales</th>
-                                    <th>More</th>
+                                    <th>Paid </th>
+                                    <th>Payment Status</th>
+                                    <th>Order Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="<?php echo public_url(); ?>storage/products/noimage.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                                        Some Product
-                                    </td>
-                                    <td>$13 USD</td>
-                                    <td>
-                                        <small class="text-success mr-1">
-                                            <i class="fa fa-arrow-up"></i>
-                                            12%
-                                        </small>
-                                        12,000 Sold
-                                    </td>
-                                    <td>
-                                        <a href="#" class="text-muted">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="<?php echo public_url(); ?>storage/products/noimage.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                                        Another Product
-                                    </td>
-                                    <td>$29 USD</td>
-                                    <td>
-                                        <small class="text-warning mr-1">
-                                            <i class="fa fa-arrow-down"></i>
-                                            0.5%
-                                        </small>
-                                        123,234 Sold
-                                    </td>
-                                    <td>
-                                        <a href="#" class="text-muted">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="<?php echo public_url(); ?>storage/products/noimage.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                                        Amazing Product
-                                    </td>
-                                    <td>$1,230 USD</td>
-                                    <td>
-                                        <small class="text-danger mr-1">
-                                            <i class="fa fa-arrow-down"></i>
-                                            3%
-                                        </small>
-                                        198 Sold
-                                    </td>
-                                    <td>
-                                        <a href="#" class="text-muted">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="<?php echo public_url(); ?>storage/products/noimage.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                                        Perfect Item
-                                        <span class="badge bg-danger">NEW</span>
-                                    </td>
-                                    <td>$199 USD</td>
-                                    <td>
-                                        <small class="text-success mr-1">
-                                            <i class="fa fa-arrow-up"></i>
-                                            63%
-                                        </small>
-                                        87 Sold
-                                    </td>
-                                    <td>
-                                        <a href="#" class="text-muted">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -206,7 +128,37 @@ require_once(PUBLIC_PATH . DS . "layouts" . DS . "header.php"); ?>
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
+    <div class="modal fade" id="newOrderModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </div>
 <!-- /.content -->
 
 <?php require_once(PUBLIC_PATH . DS . "layouts" . DS . "footer.php"); ?>
+
+<script>
+    $(document).ready(function(){
+        $('#newOrderBtn').click(function(){
+            $('#newOrderModal').modal('show');
+        });
+    })
+</script>
