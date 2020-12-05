@@ -125,7 +125,7 @@ class Orders
         }
     }
 
-    public function find_by_type_id($user_id = 0)
+    public function find_by_user_id($user_id = 0)
     {
         $query = "SELECT * FROM " . $this->table_name . " ";
         $query .= "WHERE user_id = :user_id ";
@@ -148,7 +148,7 @@ class Orders
         }
     }
 
-    public function find_by_type_id_with_limit($user_id = 0, $limit)
+    public function find_by_user_id_with_limit($user_id = 0, $limit)
     {
         $query = "SELECT * FROM " . $this->table_name . " ";
         $query .= "WHERE user_id = :user_id ";

@@ -26,3 +26,6 @@ require_once(MODELS_PATH.DS.'food_type.php');
 
 // load foods
 require_once(MODELS_PATH.DS.'foods.php');
+
+// load foods
+require_once(MODELS_PATH.DS.'orders.php');

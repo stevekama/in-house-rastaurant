@@ -104,21 +104,7 @@ require_once(PUBLIC_PATH . DS . "layouts" . DS . "header.php"); ?>
                             </a>
                         </div>
                     </div>
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-striped table-valign-middle">
-                            <thead>
-                                <tr>
-                                    <th>Food</th>
-                                    <th>Price</th>
-                                    <th>Paid </th>
-                                    <th>Payment Status</th>
-                                    <th>Order Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+                    <div id="loadOrders" class="card-body table-responsive p-0">
                     </div>
                 </div>
                 <!-- /.card -->
@@ -156,9 +142,56 @@ require_once(PUBLIC_PATH . DS . "layouts" . DS . "header.php"); ?>
 <?php require_once(PUBLIC_PATH . DS . "layouts" . DS . "footer.php"); ?>
 
 <script>
-    $(document).ready(function(){
-        $('#newOrderBtn').click(function(){
-            $('#newOrderModal').modal('show');
+    $(document).ready(function() {
+
+        $('#newOrderBtn').click(function() {
+            $.ajax({
+                url: "<?php echo base_url(); ?>api/orders/new_order.php",
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                   if(data.message == 'success'){
+                       var order_id = $.trim(data.order_id);
+                       localStorage.setItem('order_id', order_id);
+                       window.location.href = '<?php echo base_url(); ?>public/orders/view.php?order='+order_id;
+                   }
+                }
+            });
         });
+        
+        find_user_orders();
+        function find_user_orders() {
+            var action = "FETCH_USER_ORDERS_LIMIT";
+            $.ajax({
+                url: "<?php echo base_url(); ?>api/orders/orders.php",
+                type: "POST",
+                data: {
+                    action: action
+                },
+                dataType: "json",
+                success: function(data) {
+                    $('#loadOrders').html(data.orders);
+                }
+            });
+        }
+
+        $(document).on('click', '.view', function(){
+            var order_id = $(this).attr('id');
+            var action = "FETCH_ORDER";
+            $.ajax({
+                url: "<?php echo base_url(); ?>api/orders/orders.php",
+                type: "POST",
+                data: {
+                    action: action,
+                    order_id:order_id
+                },
+                dataType: "json",
+                success: function(data) {
+                    var order_id = $.trim(data.id);
+                    localStorage.setItem('order_id', order_id);
+                    window.location.href = '<?php echo base_url(); ?>public/orders/view.php?order='+order_id;
+                }
+            });
+        })
     })
 </script>
